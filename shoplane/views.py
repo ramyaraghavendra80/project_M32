@@ -8,3 +8,9 @@ from .data import productes
 class Productlist(View):
     def get(self, request):
         return JsonResponse(productes, safe=False)
+
+class Productdetails(View):
+    def get(self,request,product_id):
+        product=next((product for product in productes if product['product_id']== product_id), None)
+        return JsonResponse(product,safe=False)
+        

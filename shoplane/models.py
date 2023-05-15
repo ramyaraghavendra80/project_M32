@@ -7,6 +7,7 @@ class Rating(models.Model):
     count= models.IntegerField()
 
 class Product(models.Model):
+    product_id= models.IntegerField()
     title= models.CharField(max_length=100)
     description= models.TextField(max_length=100,blank=True)
     price= models.DecimalField(max_digits=6, decimal_places=2)
