@@ -1,17 +1,16 @@
 from rest_framework import serializers
-from .models import Product
-from .models import Rating
+from .models import Product, Rating, Order, ProductReview, MyCartView
 
-
-class ProductSerializer(serializers.ModelSerializer):
-    rating=RatingSerializer()
-    class Meta:
-        model=Products
-        fields='__all__'
 
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model=Rating
+        fields='__all__'
+
+class ProductSerializer(serializers.ModelSerializer):
+    rating=RatingSerializer()
+    class Meta:
+        model=Product
         fields='__all__'
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -19,3 +18,14 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model=Order
         fields='__all__'
+
+class ProductReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=ProductReview
+        fields='__all__'
+
+class MyCartViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= MyCartView
+        fields='__all__'
+

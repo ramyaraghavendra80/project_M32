@@ -22,3 +22,15 @@ class Order(models.Model):
     update_at = models.DateField(auto_now=True)
     status = models.TextField(max_length=100)
     sub_total = models.DecimalField(max_digits=25, decimal_places=2) 
+
+class ProductReview(models.Model):
+    review_id=models.IntegerField()
+    product_id=models.IntegerField()
+    user_id=models.IntegerField()
+    comment=models.CharField(max_length=1000)
+    rating= models.DecimalField(max_digits=4, decimal_places=2)
+
+class MyCartView(models.Model):
+    cart_id=models.IntegerField()
+    product_name=models.CharField(max_length=100)
+    quantity = models.IntegerField()
