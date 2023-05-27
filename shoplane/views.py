@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse, Http404, HttpResponseBadRequest
 from .data import productes, cartitems
-from .serializers import ProductSerializer, ProductReviewSerializer, MyCartViewSerializer
+from .serializers import ProductSerializer, ProductReviewSerializer, MyCartViewSerializer, UserSerializer
 import json
 
 product_reviews=[]
 cart_items=[]
+users=[]
 
 class Productlist(View):
     def get(self, request):
@@ -87,4 +88,25 @@ class SearchView(View):
                 find.append(val)
         find_serialized = ProductSerializer(find, many=True).data
         return JsonResponse(find_serialized, safe=False)
+
+class UserSignup(View):
+    def post(self, request):
+        user_data=json.loads(request.body)
+        user_data["user_id"]=len(users)+1
+        user_serialized=UserSerializer(data=user_data)
+        if(user_serialized.is_valid()):
+            users.append(user_serialized.data)
+            return JsonResponse("Registered successfully", safe=False)
+        else:
+            return JsonResponse(user_serialized.errors, safe=False)
+
+class UserSignin(View):
+    def post(self, request):
+        user_data=json.loads(request.body)
+        print(user_data)
+        print(user_data["email_id"])
+        for index, item in enumerate(users):
+                if(item["email_id"]==user_data["email_id"] and item["password"]==user_data["password"]):
+                    return JsonResponse("Login is Successful", safe=False)
+        return JsonResponse("Login is not Successful", safe=False)
     

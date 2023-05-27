@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Productlist, Productdetails, ProductReview, SearchView, MyCartView, CartView, UpdateCart, CheckoutView
+from .views import Productlist, Productdetails, ProductReview, SearchView, MyCartView, CartView, UpdateCart, CheckoutView, UserSignup, UserSignin
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -12,5 +12,7 @@ urlpatterns=[
     path('products/<int:cart_id>/cartview/', csrf_exempt(CartView.as_view()), name="cart_view"),
     path('cartview/updatecart/<int:cart_id>/', csrf_exempt(UpdateCart.as_view()), name="update_cart"),
     path('cartview/updatecart/<int:cart_id>/checkoutcart/', csrf_exempt(CheckoutView.as_view()), name="checkout_cart"),
+    path('user/signup/', csrf_exempt(UserSignup.as_view()), name="user_signup"),
+    path('user/signin/', csrf_exempt(UserSignin.as_view()), name="user_signin"),
 
 ]
